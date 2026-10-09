@@ -8,7 +8,7 @@ import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
 import '../../../core/widgets/settings_group.dart';
 
-/// M8 · Профіль (FR-02, FR-04, FR-10).
+/// M8 · Профіль
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 

@@ -30,10 +30,10 @@ class AppBottomNav extends StatelessWidget {
       ),
       child: SafeArea(
         top: false,
-        child: SizedBox(
-          height: 80,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(minHeight: 80),
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(12, 11, 12, 0),
+            padding: const EdgeInsets.fromLTRB(12, 11, 12, 11),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

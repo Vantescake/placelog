@@ -6,8 +6,7 @@ import '../../../core/widgets/place_card.dart';
 import '../../../core/widgets/search_field.dart';
 import '../../../core/widgets/stat_card.dart';
 
-/// M4 · Головна (FR-06): привітання, пошук, статистика
-/// та нещодавно відвідані заклади.
+/// Головна
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -16,7 +15,6 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: ListView(
-        // Нижній відступ, щоб FAB не перекривав останню картку.
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 96),
         children: [
           const Text('Привіт, ${MockData.userName}', style: AppText.title),

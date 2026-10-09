@@ -10,7 +10,7 @@ import '../../../core/widgets/app_text_field.dart';
 import '../../../core/widgets/auth_footer_link.dart';
 import '../../../core/widgets/full_height_scroll.dart';
 
-/// M2 · Реєстрація (FR-01).
+/// Реєстрація
 class RegisterScreen extends StatelessWidget {
   const RegisterScreen({super.key});
 

@@ -34,10 +34,10 @@ class SettingsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: SizedBox(
-        height: 50,
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(minHeight: 50),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 17),
+          padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 12),
           child: Row(
             children: [
               Expanded(

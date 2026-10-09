@@ -17,14 +17,15 @@ class AuthFooterLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    // Wrap переносить «Створити» на новий рядок, якщо не вміщається.
+    return Wrap(
+      alignment: WrapAlignment.center,
       children: [
         Text(
           question,
           style: const TextStyle(fontSize: 15, color: AppColors.textSecondary),
         ),
-        const SizedBox(width: 6),
+        const SizedBox(width: 6, height: 20),
         GestureDetector(
           onTap: onTap,
           child: Text(

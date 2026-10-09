@@ -19,7 +19,6 @@ class PlaceLogApp extends StatelessWidget {
       theme: AppTheme.dark,
       initialRoute: AppRoutes.login,
       routes: AppRoutes.routes,
-      // Увесь застосунок відображається у межах мобільної ширини.
       builder: (context, child) => MobileFrame(child: child!),
     );
   }

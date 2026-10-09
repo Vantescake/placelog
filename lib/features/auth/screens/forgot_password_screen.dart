@@ -7,10 +7,7 @@ import '../../../core/widgets/app_back_button.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
 
-/// M3 · Відновлення пароля (FR-03).
-///
-/// Після натискання «Надіслати посилання» з'являється картка
-/// «Перевірте пошту» — лист насправді не надсилається.
+/// M3 · Відновлення пароля 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
