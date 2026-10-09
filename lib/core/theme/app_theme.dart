@@ -29,11 +29,6 @@ abstract final class AppTheme {
         selectionColor: Color(0x55C2512F),
         selectionHandleColor: AppColors.accent,
       ),
-      snackBarTheme: const SnackBarThemeData(
-        backgroundColor: AppColors.surface,
-        contentTextStyle: TextStyle(color: AppColors.textPrimary, fontSize: 14),
-        behavior: SnackBarBehavior.floating,
-      ),
     );
   }
 }

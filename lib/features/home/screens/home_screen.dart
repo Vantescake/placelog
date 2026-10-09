@@ -9,10 +9,7 @@ import '../../../core/widgets/stat_card.dart';
 /// M4 · Головна (FR-06): привітання, пошук, статистика
 /// та нещодавно відвідані заклади.
 class HomeScreen extends StatelessWidget {
-  /// Перехід на вкладку «Заклади» (кнопка «Усі»).
-  final VoidCallback? onShowAll;
-
-  const HomeScreen({super.key, this.onShowAll});
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -56,20 +53,12 @@ class HomeScreen extends StatelessWidget {
               const Expanded(
                 child: Text('Нещодавно відвідані', style: AppText.section),
               ),
-              GestureDetector(
-                onTap: onShowAll,
-                child: const Text('Усі', style: AppText.link),
-              ),
+              const Text('Усі', style: AppText.link),
             ],
           ),
           const SizedBox(height: 16),
           for (final place in MockData.recentPlaces) ...[
-            PlaceCard(
-              place: place,
-              onTap: () => ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('${place.name}: екран закладу — у ЛР №4')),
-              ),
-            ),
+            PlaceCard(place: place),
             const SizedBox(height: 16),
           ],
         ],

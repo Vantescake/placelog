@@ -8,15 +8,9 @@ import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_text_field.dart';
 import '../../../core/widgets/settings_group.dart';
 
-/// M8 · Профіль (FR-02, FR-04, FR-05, FR-10).
+/// M8 · Профіль (FR-02, FR-04, FR-10).
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
-
-  void _showMessage(BuildContext context, String text) {
-    ScaffoldMessenger.of(context)
-      ..hideCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(text)));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +21,7 @@ class ProfileScreen extends StatelessWidget {
         children: [
           const Text('Профіль', style: AppText.title),
           const SizedBox(height: 16),
-          Center(
-            child: _Avatar(
-              onChangePhoto: () =>
-                  _showMessage(context, 'Вибір фото буде додано пізніше'),
-            ),
-          ),
+          const Center(child: _Avatar()),
           const SizedBox(height: 14),
           const Text(
             MockData.userFullName,
@@ -59,17 +48,13 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 16),
           AppButton(
             text: 'Зберегти зміни',
-            onPressed: () => _showMessage(context, 'Профіль оновлено'),
+            onPressed: () {},
           ),
           const SizedBox(height: 16),
-          SettingsGroup(
+          const SettingsGroup(
             children: [
-              SettingsTile(
-                title: 'Змінити пароль',
-                onTap: () =>
-                    Navigator.pushNamed(context, AppRoutes.changePassword),
-              ),
-              const SettingsTile(title: 'Мова', value: 'Українська'),
+              SettingsTile(title: 'Змінити пароль'),
+              SettingsTile(title: 'Мова', value: 'Українська'),
             ],
           ),
           const SizedBox(height: 16),
@@ -88,11 +73,9 @@ class ProfileScreen extends StatelessWidget {
   }
 }
 
-/// Аватар із першою літерою імені та кнопкою зміни фото.
+/// Аватар із першою літерою імені та значком камери.
 class _Avatar extends StatelessWidget {
-  final VoidCallback onChangePhoto;
-
-  const _Avatar({required this.onChangePhoto});
+  const _Avatar();
 
   @override
   Widget build(BuildContext context) {
@@ -120,21 +103,17 @@ class _Avatar extends StatelessWidget {
           Positioned(
             right: 2,
             bottom: 2,
-            child: Material(
-              color: AppColors.primary,
-              shape: const CircleBorder(),
-              child: InkWell(
-                customBorder: const CircleBorder(),
-                onTap: onChangePhoto,
-                child: const SizedBox(
-                  width: 32,
-                  height: 32,
-                  child: Icon(
-                    Icons.photo_camera_outlined,
-                    size: 16,
-                    color: Colors.white,
-                  ),
-                ),
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: const BoxDecoration(
+                color: AppColors.primary,
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.photo_camera_outlined,
+                size: 16,
+                color: Colors.white,
               ),
             ),
           ),
