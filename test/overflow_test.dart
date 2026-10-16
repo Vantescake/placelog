@@ -5,6 +5,7 @@ import 'package:placelog/features/auth/screens/forgot_password_screen.dart';
 import 'package:placelog/features/auth/screens/login_screen.dart';
 import 'package:placelog/features/auth/screens/register_screen.dart';
 import 'package:placelog/features/main/main_shell.dart';
+import 'package:placelog/features/profile/screens/change_password_screen.dart';
 
 /// Перевіряє, що на телефоні 390×844 елементи не вилазять за межі
 /// по висоті (BOTTOM OVERFLOWED), навіть зі збільшеним масштабом тексту.
@@ -18,6 +19,7 @@ void main() {
     'register': const RegisterScreen(),
     'forgot password': const ForgotPasswordScreen(),
     'home + profile': const MainShell(),
+    'change password': const ChangePasswordScreen(),
   };
 
   for (final scale in [1.0, 1.15, 1.3]) {

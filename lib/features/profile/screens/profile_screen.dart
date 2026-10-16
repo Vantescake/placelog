@@ -51,10 +51,14 @@ class ProfileScreen extends StatelessWidget {
             onPressed: () {},
           ),
           const SizedBox(height: 16),
-          const SettingsGroup(
+          SettingsGroup(
             children: [
-              SettingsTile(title: 'Змінити пароль'),
-              SettingsTile(title: 'Мова', value: 'Українська'),
+              SettingsTile(
+                title: 'Змінити пароль',
+                onTap: () =>
+                    Navigator.pushNamed(context, AppRoutes.changePassword),
+              ),
+              const SettingsTile(title: 'Мова', value: 'Українська'),
             ],
           ),
           const SizedBox(height: 16),
