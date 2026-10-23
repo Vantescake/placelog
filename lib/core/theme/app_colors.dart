@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Палітра темної теми PlaceLog (взята з макетів Figma «КПП-2»).
 abstract final class AppColors {
   static const background = Color(0xFF0F1110);
   static const surface = Color(0xFF171A17);
@@ -14,6 +13,5 @@ abstract final class AppColors {
   static const success = Color(0xFF4A9B63);
   static const track = Color(0xFF283028);
 
-  /// Фон за межами «телефона», коли застосунок відкрито на широкому екрані.
   static const outside = Color(0xFF070807);
 }

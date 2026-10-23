@@ -16,7 +16,7 @@ class ChangePasswordScreen extends StatefulWidget {
 }
 
 class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
-  String _newPassword = 'Placelog26';
+  String _newPassword = 'Placelog';
 
   @override
   Widget build(BuildContext context) {

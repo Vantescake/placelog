@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Hardcoded-дані замість бекенду (ЛР №3 виконується без бізнес-логіки).
 abstract final class MockData {
   static const String userName = 'Андрій';
   static const String userFullName = 'Андрій Родінчук';

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'app_colors.dart';
 
-/// Тема Material 3 у темному варіанті відповідно до дизайну.
 abstract final class AppTheme {
   static ThemeData get dark {
     final base = ThemeData(
@@ -33,7 +32,6 @@ abstract final class AppTheme {
   }
 }
 
-/// Типографіка з макета (Inter: 30 Bold заголовки, 15 Regular текст, 13 Medium підписи).
 abstract final class AppText {
   static const title = TextStyle(
     fontSize: 30,
