@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/data/mock_data.dart';
+import '../../../core/services/app_services.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/widgets/place_card.dart';
 import '../../../core/widgets/search_field.dart';
 import '../../../core/widgets/stat_card.dart';
+import '../../../data/auth/auth_repository.dart';
 
-/// Головна
+/// Головна. Статистика й заклади поки з MockData (Firestore буде пізніше),
+/// а ім'я користувача — з Firebase Authentication через AuthRepository.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -17,7 +20,17 @@ class HomeScreen extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.fromLTRB(20, 8, 20, 96),
         children: [
-          const Text('Привіт, ${MockData.userName}', style: AppText.title),
+          StreamBuilder<AppUser?>(
+            stream: AppServices.auth.authStateChanges(),
+            initialData: AppServices.auth.currentUser,
+            builder: (context, snapshot) {
+              final name = snapshot.data?.name ?? '';
+              return Text(
+                name.isEmpty ? 'Привіт!' : 'Привіт, ${name.split(' ').first}',
+                style: AppText.title,
+              );
+            },
+          ),
           const SizedBox(height: 16),
           const SearchField(hint: 'Пошук закладів'),
           const SizedBox(height: 16),

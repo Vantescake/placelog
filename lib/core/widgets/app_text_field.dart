@@ -5,24 +5,36 @@ import '../theme/app_theme.dart';
 
 /// Поле введення з підписом над ним (компонент «Field» з макета).
 ///
-/// Для паролів ([isPassword]) показує кнопку-«око», яка перемикає
-/// видимість символів.
+/// Працює всередині [Form]: [validator] перевіряє значення під час
+/// `FormState.validate()`. Для паролів ([isPassword]) показує кнопку-«око».
 class AppTextField extends StatefulWidget {
   final String label;
+  final TextEditingController? controller;
   final String? initialValue;
   final String? hint;
   final bool isPassword;
+  final bool enabled;
   final TextInputType keyboardType;
+  final TextInputAction? textInputAction;
+  final Iterable<String>? autofillHints;
+  final FormFieldValidator<String>? validator;
   final ValueChanged<String>? onChanged;
+  final ValueChanged<String>? onSubmitted;
 
   const AppTextField({
     super.key,
     required this.label,
+    this.controller,
     this.initialValue,
     this.hint,
     this.isPassword = false,
+    this.enabled = true,
     this.keyboardType = TextInputType.text,
+    this.textInputAction,
+    this.autofillHints,
+    this.validator,
     this.onChanged,
+    this.onSubmitted,
   });
 
   @override
@@ -34,10 +46,10 @@ class _AppTextFieldState extends State<AppTextField> {
 
   @override
   Widget build(BuildContext context) {
-    final border = OutlineInputBorder(
-      borderRadius: BorderRadius.circular(12),
-      borderSide: const BorderSide(color: AppColors.border),
-    );
+    OutlineInputBorder border(Color color) => OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(color: color),
+        );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,24 +57,33 @@ class _AppTextFieldState extends State<AppTextField> {
         Text(widget.label, style: AppText.label),
         const SizedBox(height: 8),
         TextFormField(
-          initialValue: widget.initialValue,
+          controller: widget.controller,
+          initialValue: widget.controller == null ? widget.initialValue : null,
+          enabled: widget.enabled,
           obscureText: _obscured,
           obscuringCharacter: '•',
           keyboardType: widget.keyboardType,
+          textInputAction: widget.textInputAction,
+          autofillHints: widget.autofillHints,
+          validator: widget.validator,
           onChanged: widget.onChanged,
+          onFieldSubmitted: widget.onSubmitted,
           style: AppText.input,
           decoration: InputDecoration(
             hintText: widget.hint,
             hintStyle: AppText.input.copyWith(color: AppColors.textSecondary),
+            errorStyle: const TextStyle(fontSize: 13, color: AppColors.accent),
+            errorMaxLines: 2,
             filled: true,
             fillColor: AppColors.surface,
             isDense: true,
             contentPadding:
                 const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            enabledBorder: border,
-            focusedBorder: border.copyWith(
-              borderSide: const BorderSide(color: AppColors.accent),
-            ),
+            enabledBorder: border(AppColors.border),
+            disabledBorder: border(AppColors.border),
+            focusedBorder: border(AppColors.accent),
+            errorBorder: border(AppColors.primary),
+            focusedErrorBorder: border(AppColors.accent),
             suffixIcon: widget.isPassword
                 ? IconButton(
                     onPressed: () => setState(() => _obscured = !_obscured),

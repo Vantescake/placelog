@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../core/services/app_services.dart';
 import '../../core/theme/app_colors.dart';
 import '../../core/widgets/app_bottom_nav.dart';
 import '../home/screens/home_screen.dart';
@@ -22,9 +23,18 @@ class _MainShellState extends State<MainShell> {
 
   int _index = _homeTab;
 
+  @override
+  void initState() {
+    super.initState();
+    AppServices.analytics.logScreen('home');
+  }
+
   void _select(int index) {
     if (index != _homeTab && index != _profileTab) return;
+    if (index == _index) return;
     setState(() => _index = index);
+    // Вкладки не є маршрутами Navigator, тому screen_view реєструємо вручну.
+    AppServices.analytics.logScreen(index == _homeTab ? 'home' : 'profile');
   }
 
   @override

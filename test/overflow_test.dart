@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:placelog/core/services/app_services.dart';
 import 'package:placelog/core/theme/app_theme.dart';
+import 'package:placelog/data/auth/auth_repository.dart';
 import 'package:placelog/features/auth/screens/forgot_password_screen.dart';
 import 'package:placelog/features/auth/screens/login_screen.dart';
 import 'package:placelog/features/auth/screens/register_screen.dart';
 import 'package:placelog/features/main/main_shell.dart';
 import 'package:placelog/features/profile/screens/change_password_screen.dart';
+
+import 'fake_auth_repository.dart';
 
 /// Перевіряє, що на телефоні 390×844 елементи не вилазять за межі
 /// по висоті (BOTTOM OVERFLOWED), навіть зі збільшеним масштабом тексту.
@@ -14,6 +18,16 @@ import 'package:placelog/features/profile/screens/change_password_screen.dart';
 /// малює кожну літеру квадратом, тому текст у тестах значно ширший,
 /// ніж у реальному застосунку.
 void main() {
+  setUp(() {
+    AppServices.auth = FakeAuthRepository(
+      signedIn: const AppUser(
+        uid: '1',
+        email: 'andrii@example.com',
+        name: 'Андрій Родінчук',
+      ),
+    );
+  });
+
   final screens = <String, Widget>{
     'login': const LoginScreen(),
     'register': const RegisterScreen(),

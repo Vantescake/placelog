@@ -7,10 +7,13 @@ import '../theme/app_theme.dart';
 ///
 /// [AppButton] — основна (теракотова) кнопка: «Увійти», «Зберегти зміни».
 /// [AppButton.outlined] — другорядна кнопка з рамкою: «Вийти з акаунта».
+/// Поки [isLoading] true, кнопка показує індикатор і не натискається,
+/// тож запит не можна надіслати повторно.
 class AppButton extends StatelessWidget {
   final String text;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
   final IconData? icon;
+  final bool isLoading;
   final bool _outlined;
 
   const AppButton({
@@ -18,6 +21,7 @@ class AppButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.icon,
+    this.isLoading = false,
   }) : _outlined = false;
 
   const AppButton.outlined({
@@ -25,18 +29,21 @@ class AppButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.icon,
+    this.isLoading = false,
   }) : _outlined = true;
 
   @override
   Widget build(BuildContext context) {
     final foreground = _outlined ? AppColors.accent : Colors.white;
+    final background = _outlined ? AppColors.surface : AppColors.primary;
 
     return SizedBox(
       width: double.infinity,
       child: TextButton(
-        onPressed: onPressed,
+        onPressed: isLoading ? null : onPressed,
         style: TextButton.styleFrom(
-          backgroundColor: _outlined ? AppColors.surface : AppColors.primary,
+          backgroundColor: background,
+          disabledBackgroundColor: background.withValues(alpha: 0.6),
           foregroundColor: foreground,
           padding: EdgeInsets.symmetric(vertical: _outlined ? 17 : 16),
           shape: RoundedRectangleBorder(
@@ -46,22 +53,30 @@ class AppButton extends StatelessWidget {
                 : BorderSide.none,
           ),
         ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (icon != null) ...[
-              Icon(icon, size: 20, color: foreground),
-              const SizedBox(width: 8),
-            ],
-            Flexible(
-              child: Text(
-                text,
-                textAlign: TextAlign.center,
-                style: AppText.button.copyWith(color: foreground),
+        child: isLoading
+            ? SizedBox.square(
+                dimension: 19,
+                child: CircularProgressIndicator(
+                  strokeWidth: 2.2,
+                  color: foreground,
+                ),
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (icon != null) ...[
+                    Icon(icon, size: 20, color: foreground),
+                    const SizedBox(width: 8),
+                  ],
+                  Flexible(
+                    child: Text(
+                      text,
+                      textAlign: TextAlign.center,
+                      style: AppText.button.copyWith(color: foreground),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
-        ),
       ),
     );
   }
