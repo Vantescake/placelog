@@ -19,7 +19,7 @@ class PasswordStrengthBar extends StatelessWidget {
     return score.clamp(1, 4);
   }
 
-  static const _labels = ['', 'Слабкий пароль', 'Середній пароль',
+  static const _labels = ['', 'Слабкий пароль', 'Надійний пароль',
     'Надійний пароль', 'Дуже надійний пароль'];
 
   @override
