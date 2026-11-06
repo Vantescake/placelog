@@ -5,8 +5,12 @@
 /// Його можна перевизначити під час запуску:
 /// flutter run -d chrome --dart-define=SENTRY_DSN=https://...
 abstract final class SentryConfig {
-  static const dsn = String.fromEnvironment('SENTRY_DSN');
+  static const dsn = String.fromEnvironment(
+    'SENTRY_DSN',
+    defaultValue: 'https://88f28742ddace729a2593cd9ffbbbad7'
+        '@o4512384004718592.ingest.de.sentry.io/4512384231800912',
+  );
 
-  /// Без DSN Sentry нічого не надсилає (наприклад, у тестах).
+  /// Без DSN Sentry нічого не надсилає.
   static bool get isEnabled => dsn.isNotEmpty;
 }
